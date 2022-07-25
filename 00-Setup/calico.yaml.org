@@ -535,8 +535,6 @@ spec:
         # if it ever gets evicted.
         scheduler.alpha.kubernetes.io/critical-pod: ''
     spec:
-      imagePullSecrets:
-      - name: regcred
       nodeSelector:
         kubernetes.io/os: linux
       hostNetwork: true
@@ -623,8 +621,6 @@ spec:
             mountPath: /host/driver
           securityContext:
             privileged: true
-      imagePullSecrets:
-      - name: regcred
       containers:
         # Runs calico-node container on each Kubernetes node.  This
         # container programs network policy and routes on each
