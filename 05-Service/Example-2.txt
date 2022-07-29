@@ -117,3 +117,41 @@ Windows VIP LB  -> LoadBalancer -> NodeIP:NodePort -> Proxy -> ClusterIP -> POD
 
 
 Windows : myapp-av.com -> DNS ( Lookup)   -> LoadBalancer IP -> NodeIP:NodePort -> Proxy -> ClusterIP -> POD 
+
+
+
+
+
+
+External DNS & IP Example: 
+=========================>
+External -> 
+mysql.myapp.abc.com  - 172.31.0.129:3306 
+
+
+kubectl expose deploy mysql --externalip=172.31.0.129  
+
+kubectl get svc 
+root@master:~/k8s-cka-philips-25-July-2022/22-AutoScaling# kubectl  get svc
+NAME          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)           AGE
+hpa-example   NodePort    10.111.65.87   <none>        31001:31001/TCP   26m
+kubernetes    ClusterIP   10.96.0.1      <none>        443/TCP           3d22h
+mysql         NodePort    10.111.65.89   172.31.0.129       3306:3306/TCP   26m
+root@master:~/k8s-cka-philips-25-July-2022/22-AutoScaling# 
+  
+  
+  
+  
+  
+  
+win -> mysql.myapp.abc.com:3306 -> dns ->  172.31.0.129 -> LB -> worker[1..50]:3306 -> worker19 -> POD ( KubeProxy ) [Routes] -> 10.111.65.89:3306 -> 10.10.5.15:3306 
+
+mysql 
+10.111.65.89
+172.31.0.129 
+
+Pod 10.10.5.15
+
+
+
+
